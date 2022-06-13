@@ -9,8 +9,9 @@ import javax.inject.Inject;
 
 public class RemoveBookFromCatalogActivity {
     public CatalogDao catalogDao;
+
     @Inject
-    RemoveBookFromCatalogActivity(CatalogDao catalogDao) {
+    public RemoveBookFromCatalogActivity(CatalogDao catalogDao) {
         this.catalogDao = catalogDao;
     }
 

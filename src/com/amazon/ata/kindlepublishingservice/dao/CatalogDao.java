@@ -69,4 +69,11 @@ public class CatalogDao {
         dynamoDbMapper.save(bookToRemove);
         return null;
     }
+
+    public void validateBookExists(String bookId) {
+        CatalogItemVersion bookToFind = getLatestVersionOfBook(bookId);
+        if (bookToFind == null) {
+            throw new BookNotFoundException("Could not find book with provided Book Id to update");
+        }
+    }
 }
