@@ -8,6 +8,7 @@ import com.amazon.ata.kindlepublishingservice.utils.KindlePublishingUtils;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
+import com.google.errorprone.annotations.DoNotMock;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
@@ -23,8 +24,7 @@ public class CatalogDao {
      * @param dynamoDbMapper The {@link DynamoDBMapper} used to interact with the catalog table.
      */
     @Inject
-    public CatalogDao(DynamoDBMapper dynamoDbMapper) {
-        this.dynamoDbMapper = dynamoDbMapper;
+    public CatalogDao(DynamoDBMapper dynamoDbMapper) { this.dynamoDbMapper = dynamoDbMapper;
     }
 
     /**

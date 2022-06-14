@@ -77,4 +77,16 @@ public class PublishingStatusDao {
         dynamoDbMapper.save(item);
         return item;
     }
+    public List<PublishingStatusItem> getPublishingStatus(String publishingRecordId) {
+        PublishingStatusItem item = new PublishingStatusItem();
+        item.setPublishingRecordId(publishingRecordId);
+
+        DynamoDBQueryExpression<PublishingStatusItem> queryExpression = new DynamoDBQueryExpression<PublishingStatusItem>()
+                .withHashKeyValues(item);
+        List<PublishingStatusItem> publishingStatusItems = dynamoDbMapper.query(PublishingStatusItem.class, queryExpression);
+        if(publishingStatusItems.size() == 0) {
+            throw new PublishingStatusNotFoundException("No publishing record associated with the given id.");
+        }
+        return publishingStatusItems;
+    }
 }
