@@ -17,7 +17,7 @@ public class NoOpTask implements Runnable {
     /**
      * Constructs a NoOpTask object.
      */
-    @Inject
+
     public NoOpTask() {}
 
     @Override

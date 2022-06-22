@@ -76,4 +76,30 @@ public class CatalogDao {
             throw new BookNotFoundException("Could not find book with provided Book Id to update");
         }
     }
+
+    public CatalogItemVersion createOrUpdateBook(KindleFormattedBook book) {
+        CatalogItemVersion itemVersion = new CatalogItemVersion();
+        if(book.getBookId() == null) {
+            itemVersion.setBookId(KindlePublishingUtils.generateBookId());
+            itemVersion.setVersion(1);
+
+        } else {
+            CatalogItemVersion existingVersion = getLatestVersionOfBook(book.getBookId());
+            if(existingVersion == null) {
+                throw new BookNotFoundException("Could not find book with provided Book Id to update");
+            }
+            existingVersion.setInactive(true);
+            itemVersion.setVersion(existingVersion.getVersion() + 1);
+            itemVersion.setBookId(existingVersion.getBookId());
+            dynamoDbMapper.save(existingVersion);
+        }
+        itemVersion.setAuthor(book.getAuthor());
+        itemVersion.setGenre(book.getGenre());
+        itemVersion.setTitle(book.getTitle());
+        itemVersion.setText(book.getText());
+        itemVersion.setInactive(false);
+
+        dynamoDbMapper.save(itemVersion);
+        return itemVersion;
+    }
 }

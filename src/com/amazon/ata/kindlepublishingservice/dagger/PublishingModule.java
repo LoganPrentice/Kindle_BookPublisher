@@ -13,11 +13,11 @@ import javax.inject.Singleton;
 @Module
 public class PublishingModule {
 
-    @Provides
-    @Singleton
-    public BookPublisher provideBookPublisher(ScheduledExecutorService scheduledExecutorService) {
-        return new BookPublisher(scheduledExecutorService, new NoOpTask());
-    }
+//    @Provides
+//    @Singleton
+//    public BookPublisher provideBookPublisher(ScheduledExecutorService scheduledExecutorService) {
+//        return new BookPublisher(scheduledExecutorService, new NoOpTask());
+//    }
 
     @Provides
     @Singleton
